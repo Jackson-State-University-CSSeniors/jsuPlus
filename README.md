@@ -1,8 +1,8 @@
 # jsuPlus
-Senior Project
-Fall 2021
+Senior Project.
+Fall 2021.
 
-##Database Team Lead
+#Database Team Lead
 Martin P.
 
 -Add required nuget packages in order to connect to MySql Database.

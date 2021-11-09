@@ -1,13 +1,13 @@
-﻿@{ 
-    ViewData["Title"] = "Index";
+﻿<!DOCTYPE html>
 
-    <\html>
-    <\head>
-       <body>
-
-
-         <form id ="form1" runat="server">
-          <div style="font-family:Arial">
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div  style="font-family:Arial">
             <fieldset style="width:350px">
                 <legend>Contact Us</legend>
                 <table>
@@ -17,18 +17,15 @@
                             <b>Name:</b>
                         </td>
                         <td>
-                            <input id="txtName" type="text" Width="200" runat="server" />
                             <asp:TextBox ID="txtName" Width="200px" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidtor1"
-                                runat="server"
-                                ErrorMessage="Name is required"
-                                ControlToValidate="txtName"
-                                Text="*"
-                                ForeColor="Red"
-                                
-                           > </asp:RequiredFieldValidator>
+                                                        runat="server"
+                                                        ErrorMessage="Name is required"
+                                                        ControlToValidate="txtName"
+                                                        Text="*"
+                                                        ForeColor="Red"> </asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -37,14 +34,9 @@
                             <b>Email:</b>
                         </td>
                         <td>
-                            <input id="txtEmail" type="text" Width="200" runat="server" />
-                            <asp:TextBox ID="txtEmail"
-                                         Width="200px"
-                                         runat="server">
-                            </asp:TextBox>
+                            <asp:TextBox ID="txtEmail" Width="200px" runat="server"></asp:TextBox>
                         </td>
                         <td>
-                            
                             <asp:RequiredFieldValidator ID="RequiredFieldValidtor1"
                                                         runat="server"
                                                         ErrorMessage="Email is required"
@@ -52,11 +44,8 @@
                                                         Text="*"
                                                         ForeColor="Red">
                             </asp:RequiredFieldValidator>
-
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" 
-                                                            runat="server"
-                                                            ErrorMessage="Please enter a valid email" 
-                                                            ControlToValidate="txtEmail"
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
+                                                            ErrorMessage="Please enter a valid email" ControlToValidate="txtEmail"
                                                             ForeColor="Redd">*</asp:RegularExpressionValidator>
                         </td>
                     </tr>
@@ -66,17 +55,15 @@
                             <b>Subject:</b>
                         </td>
                         <td>
-                            <input id="txtSubject" type="text" Width="200" runat="server" />
                             <asp:TextBox ID="txtSubjet" Width="200px" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidtor1"
-                                runat="server"
-                                ErrorMessage="Subject is required"
-                                ControlToValidate="txtSubject"
-                                Text="*"
-                                ForeColor="Red"
-                                >
+                                                        runat="server"
+                                                        ErrorMessage="Subject is required"
+                                                        ControlToValidate="txtSubject"
+                                                        Text="*"
+                                                        ForeColor="Red">
                             </asp:RequiredFieldValidator>
                         </td>
                     </tr>
@@ -86,47 +73,38 @@
                             <b>Comments:</b>
                         </td>
                         <td>
-                            <input id="txtComments" type="text" Width="200" runat="server" />
                             <asp:TextBox ID="txtComments" Width="200px" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidtor1"
-                                runat="server"
-                                ErrorMessage="Comments are required"
-                                ControlToValidate="txtComments"
-                                Text="*"
-                                ForeColor="Red"
-                                >
+                                                        runat="server"
+                                                        ErrorMessage="Comments are required"
+                                                        ControlToValidate="txtComments"
+                                                        Text="*"
+                                                        ForeColor="Red">
                             </asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:ValidationSummary HeaderText="Please fix the following errors " ForeColor="Red"  ID="ValidationSummary1"runat="server" />                     </td>
+                            <asp:ValidationSummary HeaderText="Please fix the following errors " ForeColor="Red" ID="ValidationSummary1" runat="server" />
+                        </td>
                     </tr>
                     <tr>
 
-                        <td
-                            colspan="3">
-                            <asp:Label ID="Label1" runat="server" Font-Bold="true" ></asp:Label>
+                        <td colspan="3">
+                            <asp:Label ID="Label1" runat="server" Font-Bold="true"></asp:Label>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3">
                             <asp:Button ID="Button1" runat="server" Text="Submit" />
-                            <input id="Button1" type="button" value="Submit" />
                         </td>
                     </tr>
                 </table>
 
             </fieldset>
-            </div>
+        </div>
         </form>
 </body>
-    </\head>  
-</\html>      
-}
-
-<h2>Contact Page</h2>
-
-<p>For support, please email us support@protonmail.com</p>
+</html>

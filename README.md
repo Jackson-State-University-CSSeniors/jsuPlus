@@ -7,7 +7,8 @@ Fall 2021.
 #Database Team Lead
 Martin P.
 - Add required nuget packages in order to connect to MySql Database.
-- Created Home controller and view. 
+- Created Home controller and view.
+- Modified coding infrastructure.
 
 Programmer 
 Timothy S. 

@@ -9,6 +9,7 @@ Martin P.
 - Add required nuget packages in order to connect to MySql Database.
 - Created Home controller and view.
 - Modified coding infrastructure.
+- Create base entity for clean architecture.
 
 Programmer 
 Timothy S. 

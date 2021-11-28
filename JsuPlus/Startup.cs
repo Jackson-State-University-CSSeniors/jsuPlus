@@ -52,9 +52,10 @@ namespace JsuPlus
 
             app.UseEndpoints(endpoints =>
             {
+                //once app begins running it will call the LoginController
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace JsuPlus.Infrastructure
 {
-    public partial class heroku_30ebef2574eacbeContext : DbContext
+    public partial class JSUPlusDbContext : DbContext
     {
-        public heroku_30ebef2574eacbeContext()
+        public JSUPlusDbContext()
         {
         }
 
-        public heroku_30ebef2574eacbeContext(DbContextOptions<heroku_30ebef2574eacbeContext> options)
+        public JSUPlusDbContext(DbContextOptions<JSUPlusDbContext> options)
             : base(options)
         {
         }
@@ -20,8 +20,7 @@ namespace JsuPlus.Infrastructure
         public virtual DbSet<Tblaccount> Tblaccounts { get; set; }
         public virtual DbSet<Tbladdress> Tbladdresses { get; set; }
         public virtual DbSet<Tblorganization> Tblorganizations { get; set; }
-        public virtual DbSet<TblorganizationHasTblparticipant> TblorganizationHasTblparticipants { get; set; }
-        public virtual DbSet<Tblparticipant> Tblparticipants { get; set; }
+        public virtual DbSet<JsuPlus.Core.Entities.Participant> Tblparticipants { get; set; }
         public virtual DbSet<Tbluniversity> Tbluniversities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -114,50 +113,20 @@ namespace JsuPlus.Infrastructure
                     .HasColumnName("tblorganizationcol");
             });
 
-            modelBuilder.Entity<TblorganizationHasTblparticipant>(entity =>
-            {
-                entity.HasKey(e => new { e.TblorganizationId, e.TblparticipantId })
-                    .HasName("PRIMARY");
-
-                entity.ToTable("tblorganization_has_tblparticipant");
-
-                entity.HasIndex(e => e.TblorganizationId, "fk_tblorganization_has_tblparticipant_tblorganization1_idx");
-
-                entity.HasIndex(e => e.TblparticipantId, "fk_tblorganization_has_tblparticipant_tblparticipant1_idx");
-
-                entity.Property(e => e.TblorganizationId)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("tblorganization_Id");
-
-                entity.Property(e => e.TblparticipantId)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("tblparticipant_Id");
-
-                entity.HasOne(d => d.Tblorganization)
-                    .WithMany(p => p.TblorganizationHasTblparticipants)
-                    .HasForeignKey(d => d.TblorganizationId)
-                    .HasConstraintName("fk_tblorganization_has_tblparticipant_tblorganization1");
-
-                entity.HasOne(d => d.Tblparticipant)
-                    .WithMany(p => p.TblorganizationHasTblparticipants)
-                    .HasForeignKey(d => d.TblparticipantId)
-                    .HasConstraintName("fk_tblorganization_has_tblparticipant_tblparticipant1");
-            });
-
-            modelBuilder.Entity<Tblparticipant>(entity =>
+            modelBuilder.Entity<JsuPlus.Core.Entities.Participant>(entity =>
             {
                 entity.ToTable("tblparticipant");
 
-                entity.HasIndex(e => e.AddressId, "AddressId_idx");
+                //entity.HasIndex(e => e.AddressId, "AddressId_idx");
 
                 entity.HasIndex(e => e.Id, "Id_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.Id).HasColumnType("int(11)");
+                entity.Property(e => e.Id).HasColumnType("char(38)");
 
-                entity.Property(e => e.AddressId)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("Address_Id");
+                //entity.Property(e => e.AddressId)
+                //    .HasColumnType("int(11)")
+                //    .HasColumnName("Address_Id");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -170,6 +139,10 @@ namespace JsuPlus.Infrastructure
                 entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(45);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
 
             modelBuilder.Entity<Tbluniversity>(entity =>

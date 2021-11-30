@@ -5,12 +5,22 @@ using System.Linq;
 using System.Data;
 using JsuPlus.Infrastructure;
 using MySql.Data.MySqlClient;
-
+using System;
+using JsuPlus.Core.Interfaces;
+using System.Threading.Tasks;
 
 namespace JsuPlus.Web.Controllers
 {
+
     public class ParticipantController : Controller
     {
+        private readonly IAsyncRepository _repository;
+
+        public ParticipantController(IAsyncRepository repository)
+        {
+            this._repository = repository;
+        }
+
        //Registration Action
        [HttpGet]
        public ActionResult Registration()
@@ -21,7 +31,7 @@ namespace JsuPlus.Web.Controllers
         //Registration POST Action
        [HttpPost]
        [ValidateAntiForgeryToken]
-       public ActionResult Registration(Participant participant)
+       public async Task<IActionResult> Registration(ParticipantViewModel participant)
         {
             bool Status = false;
             string message = "";
@@ -30,7 +40,8 @@ namespace JsuPlus.Web.Controllers
             if (ModelState.IsValid)
             {
                 #region Email already exist
-                var isExist = IsEmailExist(participant.Email);
+                //var isExist = IsEmailExist(participant.Email);
+                var isExist = false;
                 if (isExist)
                 {
                     ModelState.AddModelError("EmailExist", "Email already exist!");
@@ -41,14 +52,20 @@ namespace JsuPlus.Web.Controllers
                 #region Password Hashing
                 participant.Password = Crypto.Hash(participant.Password);
                 participant.ConfirmPassword = Crypto.Hash(participant.ConfirmPassword);
+                
+                if(participant.Password != participant.ConfirmPassword)
+                {
+                    return BadRequest("Passwords do not match");
+                }
                 #endregion
 
+                
+                JsuPlus.Core.Entities.Participant p = new Core.Entities.Participant();
+
+                p.CreateParticipant(participant.FirstName, participant.LastName, participant.DateOfBirth, participant.Email, participant.Password);
+
                 #region Save to Database
-                using(heroku_30ebef2574eacbeContext dc = new heroku_30ebef2574eacbeContext())
-                {
-                    //dc.Tblparticipants.Add(Tblparticipants);
-                    dc.SaveChanges();
-                }
+               await _repository.Add(p);
                 #endregion
             }
             else
@@ -72,7 +89,7 @@ namespace JsuPlus.Web.Controllers
         [NonAction]
         public bool IsEmailExist(string Email)
         {
-            using(heroku_30ebef2574eacbeContext dc = new heroku_30ebef2574eacbeContext())
+            using(JSUPlusDbContext dc = new JSUPlusDbContext())
             {
                 var v = dc.Tblparticipants.Where(a => a.Email == Email).FirstOrDefault();
                 return v != null;

@@ -27,7 +27,9 @@ namespace JsuPlus
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<MyDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<JsuPlus.Infrastructure.JSUPlusDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Default")));
+
+            services.AddTransient<Core.Interfaces.IAsyncRepository, JsuPlus.Infrastructure.Data.EfRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

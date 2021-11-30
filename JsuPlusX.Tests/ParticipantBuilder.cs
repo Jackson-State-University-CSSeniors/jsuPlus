@@ -1,4 +1,6 @@
 using JsuPlus.Core.Entities;
+using JsuPlus.Core.Interfaces;
+using System;
 
 namespace JsuPlus.Tests
 {
@@ -6,21 +8,12 @@ namespace JsuPlus.Tests
     {
         private readonly Participant _participant = new Participant();
 
-        public ParticipantBuilder Id(int id)
+        public ParticipantBuilder Id(Guid id)
         {
             _participant.Id = id;
             return this;
         }
-        public ParticipantBuilder FirstName(string firstname)
-        {
-            _participant.FirstName = firstname;
-            return this;
-        }
-        public ParticipantBuilder LastName(string lastname)
-        {
-            _participant.LastName = lastname;
-            return this;
-        }
+       
         public Participant Build() => _participant;
 
     }

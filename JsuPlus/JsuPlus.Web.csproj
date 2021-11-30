@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JsuPlus.Core\JsuPlus.Core.csproj" />
     <ProjectReference Include="..\JsuPlus.Infrastructure\JsuPlus.Infrastructure.csproj" />
   </ItemGroup>
 
